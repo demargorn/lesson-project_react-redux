@@ -9,12 +9,14 @@ const List = ({ onItemEdit, onItemRemove }) => {
             <li key={i.id} className='item'>
                <span className='item-name'>{i.name}</span>
                <span className='item-price'>{i.price}</span>
-               <button onClick={() => onItemEdit(i.id)} className='btn btn-info item-btn'>
-                  edit
-               </button>
-               <button onClick={() => onItemRemove(i.id)} className='btn btn-danger item-btn'>
-                  remove
-               </button>
+               <div className='button-controll'>
+                  <button onClick={() => onItemEdit(i.id)} className='btn btn-info item-btn'>
+                     edit
+                  </button>
+                  <button onClick={() => onItemRemove(i.id)} className='btn btn-danger item-btn'>
+                     remove
+                  </button>
+               </div>
             </li>
          ))}
       </ul>

@@ -4,6 +4,8 @@ import {
    ADD_SERVICE,
    REMOVE_SERVICE,
    EDIT_SERVICE,
+   FILTER_SERVICE,
+   INITIAL_SERVICE,
    CHANGE_SERVICE_FIELD,
    CLEAR_SERVICE_FIELD,
    EDIT_SERVICE_FIELD,
@@ -60,23 +62,26 @@ const App = () => {
       setEdited(false);
    };
 
-   const handlerSearchItems = (items, value) => {
+   const handlerSearchItems = (value) => {
       if (value.trim() === '') {
-         return items;
+         dispatch({ type: INITIAL_SERVICE });
       }
+      dispatch({ type: FILTER_SERVICE, payload: { value } });
+   };
 
-      return items.filter((item) => item.name.toLowerCase().includes(value.toLowerCase()));
+   const handlerSearchSubmit = (e) => {
+      e.preventDefault();
    };
 
    return (
-      <section className='container-md'>
+      <section className='container app-container'>
          <Form
             edited={edited}
             onFormSubmit={handlerFormSubmit}
             onInputChange={handleInputChange}
             onCancel={handleCancel}
          />
-         <Search onSearch={handlerSearchItems} />
+         <Search onSearch={handlerSearchItems} onSubmit={handlerSearchSubmit} />
          <List onItemEdit={handleItemEdit} onItemRemove={handleItemRemove} />
       </section>
    );

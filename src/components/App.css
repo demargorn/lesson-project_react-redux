@@ -2,6 +2,11 @@
    box-sizing: border-box;
 }
 
+.app-container {
+   display: flex;
+   flex-direction: column;
+}
+
 .form {
    display: flex;
    width: 45rem;
@@ -28,22 +33,30 @@
 }
 
 .list {
-   list-style: square;
+   display: flex;
+   flex-direction: column;
+   width: 500px;
 }
 
 .item {
+   display: flex;
+   gap: 10px;
    margin-bottom: 10px;
 }
 
 .item-name {
-   display: inline-block;
+   width: 220px;
    font-size: 20px;
-   text-align: center;
 }
 
 .item-price {
+   margin-left: auto;
    font-size: 20px;
    margin-left: 1rem;
+}
+
+.button-controll {
+   margin-left: auto;
 }
 
 .item-btn {
