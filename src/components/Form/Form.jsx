@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 
-const Form = ({ onFormSubmit, onInputChange, edited, onCancel }) => {
+const Form = ({ onFormSubmit, onInputChange, isEdited, onCancel }) => {
    const item = useSelector((s) => s.serviceAdd); // состояние формы
 
    return (
@@ -28,7 +28,7 @@ const Form = ({ onFormSubmit, onInputChange, edited, onCancel }) => {
          <button type='submit' className='btn btn-primary form-btn'>
             save
          </button>
-         {edited && (
+         {isEdited && (
             <button type='button' onClick={onCancel} className='btn btn-danger form-btn'>
                cancel
             </button>

@@ -44,7 +44,7 @@ function serviceListReducer(state = initialState, action) {
          return state.filter((s) => s.name.toLowerCase().includes(value));
       }
       case INITIAL_SERVICE: {
-         return state;
+         return [...state];
       }
       default:
          return state;
