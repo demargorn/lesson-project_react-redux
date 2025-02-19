@@ -1,0 +1,37 @@
+* {
+   box-sizing: border-box;
+}
+
+.form {
+   display: flex;
+   width: 45rem;
+   gap: 1rem;
+   margin: 2rem 0px;
+}
+
+.form-btn {
+   height: 38px;
+}
+
+.list {
+   list-style: square;
+}
+
+.item {
+   margin-bottom: 10px;
+}
+
+.item-name {
+   display: inline-block;
+   font-size: 20px;
+   text-align: center;
+}
+
+.item-price {
+   font-size: 20px;
+   margin-left: 1rem;
+}
+
+.item-btn {
+   margin-left: 10px;
+}
