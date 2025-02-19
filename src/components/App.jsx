@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
    ADD_SERVICE,
    REMOVE_SERVICE,
+   EDIT_SERVICE,
    CHANGE_SERVICE_FIELD,
    CLEAR_SERVICE_FIELD,
    EDIT_SERVICE_FIELD,
@@ -9,6 +11,7 @@ import {
 import './App.css';
 
 const App = () => {
+   const [edited, setEdited] = useState(false);
    const item = useSelector((s) => s.serviceAdd);
    const items = useSelector((s) => s.serviceList);
    const dispatch = useDispatch();
@@ -20,16 +23,25 @@ const App = () => {
 
    const handlerFormSubmit = (e) => {
       e.preventDefault();
+
       const { name, price } = item;
-      dispatch({ type: ADD_SERVICE, payload: { name, price } });
+      const idx = items.findIndex((item) => item.name === name);
+
+      if (idx > -1) {
+         dispatch({ type: EDIT_SERVICE, payload: { id: idx, name, price } });
+      } else {
+         dispatch({ type: ADD_SERVICE, payload: { name, price } });
+      }
       dispatch({ type: CLEAR_SERVICE_FIELD });
    };
 
    const handleCancel = () => {
+      setEdited(false);
       dispatch({ type: CLEAR_SERVICE_FIELD });
    };
 
    const handleItemEdit = (id) => {
+      setEdited(true);
       const edited = items.find((item) => item.id === id);
       const { name, price } = edited;
       dispatch({ type: EDIT_SERVICE_FIELD, payload: { name, price } });
@@ -49,6 +61,7 @@ const App = () => {
                   value={item.name}
                   onChange={handleInputChange}
                   className='form-control'
+                  required
                />
             </div>
             <div className='mb-3 input-div'>
@@ -58,14 +71,17 @@ const App = () => {
                   value={item.price}
                   onChange={handleInputChange}
                   className='form-control'
+                  required
                />
             </div>
             <button type='submit' className='btn btn-primary form-btn'>
                Save
             </button>
-            <button type='button' onClick={handleCancel} className='btn btn-danger form-btn'>
-               Cancel
-            </button>
+            {edited && (
+               <button type='button' onClick={handleCancel} className='btn btn-danger form-btn'>
+                  Cancel
+               </button>
+            )}
          </form>
 
          <ul className='list'>

@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid';
-import { ADD_SERVICE, REMOVE_SERVICE } from '../actions/actionTypes';
+import { ADD_SERVICE, REMOVE_SERVICE, EDIT_SERVICE } from '../actions/actionTypes';
 
 const initialState = [
    {
@@ -24,6 +24,10 @@ function serviceListReducer(state = initialState, action) {
       case ADD_SERVICE: {
          const { name, price } = action.payload;
          return [...state, { id: nanoid(), name, price }];
+      }
+      case EDIT_SERVICE: {
+         const { id, name, price } = action.payload;
+         return [...state.slice(0, id), { id, name, price }, ...state.slice(id + 1)];
       }
       case REMOVE_SERVICE: {
          const { id } = action.payload;
