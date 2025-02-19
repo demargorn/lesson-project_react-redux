@@ -1,4 +1,8 @@
-import { CHANGE_SERVICE_FIELD, CLEAR_SERVICE_FIELD, EDIT_SERVICE_FIELD } from '../actions/actionTypes';
+import {
+   CHANGE_SERVICE_FIELD,
+   CLEAR_SERVICE_FIELD,
+   EDIT_SERVICE_FIELD,
+} from '../actions/actionTypes';
 
 const initialState = {
    name: '',

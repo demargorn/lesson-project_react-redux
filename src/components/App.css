@@ -6,10 +6,24 @@
    display: flex;
    width: 45rem;
    gap: 1rem;
-   margin: 2rem 0px;
+   margin: 1rem 0 0 0;
 }
 
 .form-btn {
+   height: 38px;
+}
+
+.search-form {
+   display: flex;
+   gap: 1rem;
+   margin-bottom: 2rem;
+}
+
+.search-field {
+   width: 300px;
+}
+
+.search-btn {
    height: 38px;
 }
 
