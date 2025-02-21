@@ -18,7 +18,7 @@ import './App.css';
 const App = () => {
    const [isEdited, setIsEdited] = useState(false); //  состояние: редактируется / не редактируется
    const item = useSelector((s) => s.serviceAdd); // состояние формы
-   const items = useSelector((s) => s.serviceList); // состояние элементов списка
+   const items = useSelector((s) => s.serviceList.data); // состояние элементов списка
    const dispatch = useDispatch();
 
    const handleInputChange = (e) => {
@@ -26,7 +26,7 @@ const App = () => {
       dispatch({ type: CHANGE_SERVICE_FIELD, payload: { name, value } });
    };
 
-   const handlerFormSubmit = (e) => {
+   const handleFormSubmit = (e) => {
       e.preventDefault();
 
       const { name, price } = item;
@@ -62,14 +62,14 @@ const App = () => {
       setIsEdited(false);
    };
 
-   const handlerSearchItems = (value) => {
+   const handleSearchItems = (value) => {
       if (value.trim() === '') {
          dispatch({ type: INITIAL_SERVICE });
       }
       dispatch({ type: FILTER_SERVICE, payload: { value } });
    };
 
-   const handlerSearchSubmit = (e) => {
+   const handleSearchSubmit = (e) => {
       e.preventDefault(); // отменяем отправку по Enter
    };
 
@@ -77,11 +77,11 @@ const App = () => {
       <section className='container app-container'>
          <Form
             isEdited={isEdited}
-            onFormSubmit={handlerFormSubmit}
+            onFormSubmit={handleFormSubmit}
             onInputChange={handleInputChange}
             onCancel={handleCancel}
          />
-         <Search onSearch={handlerSearchItems} onSubmit={handlerSearchSubmit} />
+         <Search onSearch={handleSearchItems} onSubmit={handleSearchSubmit} />
          <List onItemEdit={handleItemEdit} onItemRemove={handleItemRemove} />
       </section>
    );

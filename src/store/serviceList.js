@@ -7,7 +7,7 @@ import {
    INITIAL_SERVICE,
 } from '../actions/actionTypes';
 
-const initialState = [
+const data = [
    {
       id: nanoid(),
       name: 'Замена стекла',
@@ -25,27 +25,46 @@ const initialState = [
    },
 ];
 
+const initialState = {
+   query: '',
+   data,
+};
+
 function serviceListReducer(state = initialState, action) {
    switch (action.type) {
       case ADD_SERVICE: {
          const { name, price } = action.payload;
-         return [...state, { id: nanoid(), name, price }];
+         return {
+            ...state,
+            data: [...state.data, { id: nanoid(), name, price }],
+         };
       }
       case EDIT_SERVICE: {
          const { id, name, price } = action.payload;
-         return [...state.slice(0, id), { id, name, price }, ...state.slice(id + 1)];
+         return {
+            ...state,
+            data: [...state.data.slice(0, id), { id, name, price }, ...state.data.slice(id + 1)],
+         };
       }
       case REMOVE_SERVICE: {
          const { id } = action.payload;
-         return state.filter((s) => s.id !== id);
+         return {
+            ...state,
+            data: state.data.filter((s) => s.id !== id),
+         };
       }
       case FILTER_SERVICE: {
          const { value } = action.payload;
-         return state.filter((s) => s.name.toLowerCase().includes(value));
+         return {
+            ...state,
+            query: value,
+         };
       }
-      case INITIAL_SERVICE: {
-         return [...state];
-      }
+      case INITIAL_SERVICE:
+         return {
+            ...state,
+            query: '',
+         };
       default:
          return state;
    }

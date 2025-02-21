@@ -20,7 +20,7 @@ function serviceAddReducer(state = initialState, action) {
          return { ...state, name, price };
       }
       case CLEAR_SERVICE_FIELD: {
-         return { ...initialState };
+         return { ...state };
       }
       default: {
          return state;

@@ -1,7 +1,8 @@
 import { useSelector } from 'react-redux';
 
 const List = ({ onItemEdit, onItemRemove }) => {
-   const items = useSelector((s) => s.serviceList); // состояние элементов списка
+   const { query, data } = useSelector((s) => s.serviceList);
+   const items = query ? data.filter((s) => s.name.toLowerCase().includes(query)) : data;
 
    return (
       <ul className='list'>

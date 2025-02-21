@@ -1,12 +1,8 @@
-import { useState } from 'react';
-
 const Search = ({ onSearch, onSubmit }) => {
-   const [value, setValue] = useState(''); // состояние формы поиска
-
-   const handlerSeachChange = (e) => {
+   const handleSeachChange = (e) => {
       e.preventDefault();
+      const { value } = e.target;
       onSearch(value);
-      setValue(e.target.value);
    };
 
    return (
@@ -15,8 +11,7 @@ const Search = ({ onSearch, onSubmit }) => {
             <input
                type='text'
                name='search'
-               value={value}
-               onChange={handlerSeachChange}
+               onChange={handleSeachChange}
                className='form-control search-field'
                placeholder='что хотите найти?'
             />
